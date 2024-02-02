@@ -1,0 +1,17 @@
+{
+  "name": "simple_server",
+  "version": "1.0.0",
+  "description": "simple http server",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "http"
+  ],
+  "author": "",
+  "license": "ISC"
+}
