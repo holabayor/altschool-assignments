@@ -1,31 +1,45 @@
 import http from 'node:http';
 
 const host = 'localhost';
-const port = 8000;
+const port = 8900;
 
-const mockDB = {
-  books: [
-    { id: 1, title: 'The Great Adventure', author: 'John Doe' },
-    { id: 2, title: 'Mystery of the Ancient Ruins', author: 'Emily Smith' },
-    { id: 3, title: 'Journey Through the Stars', author: 'Michael Johnson' },
-    { id: 4, title: 'Secrets of the Deep Ocean', author: 'Laura Brown' },
-  ],
-  authors: [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Emily Smith' },
-    { id: 3, name: 'Michael Johnson' },
-    { id: 4, name: 'Laura Brown' },
-  ],
-};
+const booksDB = [
+  {
+    id: 1,
+    title: 'The Adventures of Huckleberry Finn',
+    author: 'Mark Finn',
+    format: 'pdf',
+  },
+  {
+    id: 2,
+    title: 'Mystery of the Ancient Ruins',
+    author: 'Emily Smith',
+    format: 'epub',
+  },
+  {
+    id: 3,
+    title: 'Journey Through the Stars',
+    author: 'Michael Johnson',
+    format: 'pdf',
+  },
+  {
+    id: 4,
+    title: 'Secrets of the Deep Ocean',
+    author: 'Laura Brown',
+    format: 'txt',
+  },
+  {
+    id: 5,
+    title: 'The Art of Cooking Beans',
+    author: 'Tobi Oyelami',
+    format: 'pdf',
+  },
+];
 
 const handleRequest = (request, response, body) => {
-  switch (key) {
+  switch (request.method) {
     case 'GET':
-      response.end(
-        JSON.stringify({
-          data: 'Get request here!',
-        })
-      );
+      response.end(JSON.stringify(booksDB));
       break;
     case 'PUT':
       response.end(
@@ -62,9 +76,16 @@ const requestHandler = (request, response) => {
   response.setHeader('Content-Type', 'application/json');
 
   let body = '';
+  request.on('data', (chunk) => {
+    body += chunk.toString();
+  });
+
   request.on('end', () => {
+    console.log(request.url);
     switch (request.url) {
       case '/books':
+        handleRequest(request, response, body);
+        break;
 
       case '/books/author':
         if (request.method === 'GET') {
