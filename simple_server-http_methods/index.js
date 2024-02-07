@@ -1,64 +1,61 @@
+import { readFileSync } from 'node:fs';
 import http from 'node:http';
 
 const host = 'localhost';
 const port = 8900;
 
-const booksDB = [
-  {
-    id: 1,
-    title: 'The Adventures of Huckleberry Finn',
-    author: 'Mark Finn',
-    format: 'pdf',
-  },
-  {
-    id: 2,
-    title: 'Mystery of the Ancient Ruins',
-    author: 'Emily Smith',
-    format: 'epub',
-  },
-  {
-    id: 3,
-    title: 'Journey Through the Stars',
-    author: 'Michael Johnson',
-    format: 'pdf',
-  },
-  {
-    id: 4,
-    title: 'Secrets of the Deep Ocean',
-    author: 'Laura Brown',
-    format: 'txt',
-  },
-  {
-    id: 5,
-    title: 'The Art of Cooking Beans',
-    author: 'Tobi Oyelami',
-    format: 'pdf',
-  },
-];
+export const getBooks = () => {
+  try {
+    const rawText = readFileSync('./data.json', { encoding: 'utf8' });
+    const books = JSON.parse(rawText);
+    return books;
+  } catch (error) {
+    return;
+  }
+};
 
 const handleRequest = (request, response, body) => {
+  const books = getBooks();
   switch (request.method) {
     case 'GET':
-      response.end(JSON.stringify(booksDB));
+      response.end(
+        JSON.stringify({
+          method: `${request.method}`,
+          books,
+        })
+      );
+      break;
+    case 'POST':
+      if (body) {
+        const data = JSON.parse(body);
+        const newBook = {
+          id: books.length + 1,
+          title: data.title,
+          author: data.author,
+          format: data.format,
+        };
+        books.push(newBook);
+      }
+      response.end(
+        JSON.stringify({
+          method: `${request.method}`,
+          books,
+        })
+      );
       break;
     case 'PUT':
       response.end(
         JSON.stringify({
-          data: 'Put request here!',
+          method: `${request.method}`,
+          books,
         })
       );
       break;
     case 'DELETE':
       response.end(
         JSON.stringify({
-          data: 'Delete here!',
-        })
-      );
-      break;
-    case 'POST':
-      response.end(
-        JSON.stringify({
-          data: 'Delete here!',
+          method: `${request.method}`,
+          books,
         })
       );
       break;
@@ -81,40 +78,15 @@ const requestHandler = (request, response) => {
   });
 
   request.on('end', () => {
-    console.log(request.url);
     switch (request.url) {
       case '/books':
         handleRequest(request, response, body);
         break;
 
       case '/books/author':
-        if (request.method === 'GET') {
-          response.end(
-            JSON.stringify({
-              data: 'Get request here!',
-            })
-          );
-        } else if (request.method === 'POST') {
-          response.end(
-            JSON.stringify({
-              data: 'Post request here!',
-            })
-          );
-        } else if (request.method === 'PUT') {
-          response.end(
-            JSON.stringify({
-              data: 'Put here!',
-            })
-          );
-        } else {
-          response.statusCode = 405;
-          response.end(
-            JSON.stringify({
-              error: 'Method not allowed',
-            })
-          );
-        }
+        handleRequest(request, response, body);
         break;
+
       default:
         response.statusCode = 404;
         response.end(

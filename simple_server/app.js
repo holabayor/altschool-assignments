@@ -4,13 +4,10 @@ const host = 'localhost';
 const port = 8900;
 
 const server = http.createServer((request, response) => {
-  response.setHeader('Content-Type', 'application/json');
+  request.headers;
+  response.setHeader('Content-Type', 'text/plain');
   response.statusCode = 200;
-  response.end(
-    JSON.stringify({
-      name: 'Liasu Aanuoluwapo',
-    })
-  );
+  response.end(JSON.stringify('Liasu Aanuoluwapo'));
 });
 
 server.listen(port, host, () => {
