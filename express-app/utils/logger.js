@@ -2,15 +2,16 @@
 
 const logger = (req, res, next) => {
   console.log(
-    'Request',
-    JSON.stringify({
+    'REQUEST:',
+    {
       url: req.url,
       method: req.method,
       IP: req.socket.remoteAddress,
       time: new Date(),
       body: req.body,
       query: req.query,
-    })
+    },
+    '\n'
   );
   next();
 };
