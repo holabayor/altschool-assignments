@@ -35,7 +35,7 @@ const handleRequest = (request, response, body) => {
           })
         );
         break;
-      case 'PUT':
+      case 'PUT' || 'PATCH':
         response.end(
           JSON.stringify({
             method: `${request.method}`,
