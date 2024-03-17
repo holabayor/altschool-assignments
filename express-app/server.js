@@ -1,5 +1,5 @@
 const express = require('express');
-const logger = require('./utils/logger');
+const { logger, responseLogger } = require('./utils/logger');
 const router = require('./routes');
 
 const app = express();
@@ -10,6 +10,7 @@ const host = 'localhost';
 // Middlewares
 app.use(express.json());
 app.use(logger);
+app.use(responseLogger);
 
 // Routes
 app.get('/', (req, res) => {
