@@ -3,30 +3,42 @@
     "id": 1,
     "title": "The Adventures of Huckleberry Finn",
     "author": "Mark Finn",
+    "pages": 317,
     "format": "pdf"
   },
   {
     "id": 2,
     "title": "Mystery of the Ancient Ruins",
     "author": "Emily Smith",
+    "pages": 207,
     "format": "epub"
   },
   {
     "id": 3,
     "title": "Journey Through the Stars",
     "author": "Michael Johnson",
+    "pages": 184,
     "format": "pdf"
   },
   {
     "id": 4,
     "title": "Secrets of the Deep Ocean",
     "author": "Laura Brown",
+    "pages": 78,
     "format": "txt"
   },
   {
     "id": 5,
+    "title": "A journey to Renewed Shege 2.0",
+    "author": "Bola Ahmed Tinubu",
+    "pages": 2024,
+    "format": "pdf"
+  },
+  {
+    "id": 6,
     "title": "The Art of Cooking Beans",
     "author": "Chef Tobi Oyelami",
+    "pages": 999,
     "format": "pdf"
   }
 ]

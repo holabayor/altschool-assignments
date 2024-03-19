@@ -24,7 +24,7 @@ app.all('*', (req, res) => {
 });
 
 app.listen(port, host, () => {
-  console.log(`Server listening on http://${host}:${8900}`);
+  console.log(`Server listening on http://${host}:${port}`);
 });
 
 //NOTE: THE DATA ARE NOT PERSISTENT AS THERE IS NO LINKED DATABASE
