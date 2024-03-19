@@ -1,12 +1,12 @@
-import { readFileSync } from 'node:fs';
-import http from 'node:http';
+const http = require('node:http');
+const { readFileSync } = require('node:fs');
 
 const host = 'localhost';
 const port = 8900;
 
-export const getBooks = () => {
+const getBooks = () => {
   try {
-    const rawText = readFileSync('./data.json', { encoding: 'utf8' });
+    const rawText = readFileSync('./db.json', { encoding: 'utf8' });
     const books = JSON.parse(rawText);
     return books;
   } catch (error) {
