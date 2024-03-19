@@ -2,7 +2,6 @@
   "name": "simple_server",
   "version": "1.0.0",
   "description": "simple http server",
-  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

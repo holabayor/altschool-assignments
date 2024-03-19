@@ -1,4 +1,4 @@
-import http from 'node:http';
+const http = require('node:http');
 
 const host = 'localhost';
 const port = 8900;

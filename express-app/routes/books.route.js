@@ -2,6 +2,7 @@ const express = require('express');
 const { getBooks, findBookById } = require('../utils/db.function');
 
 const bookRouter = express.Router();
+const books = getBooks();
 
 // Get all books
 bookRouter.get('/', (req, res) => {
@@ -62,6 +63,7 @@ bookRouter.patch('/:id', (req, res) => {
 // Delete a books
 bookRouter.delete('/:id', function (req, res) {
   const book = findBookById(req.params.id);
+  const books = getBooks();
 
   if (!book) {
     res.status(404).json({ error: 'Book not found' });
