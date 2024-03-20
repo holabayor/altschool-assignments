@@ -5,6 +5,6 @@ const authorRouter = require('./authors.route');
 const router = express.Router();
 
 router.use('/books', bookRouter);
-router.use('/author', authorRouter);
+router.use('/books/author', authorRouter);
 
 module.exports = router;

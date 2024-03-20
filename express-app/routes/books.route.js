@@ -2,7 +2,6 @@ const express = require('express');
 const { getBooks, findBookById, saveBooks } = require('../utils/db.function');
 
 const bookRouter = express.Router();
-const books = getBooks();
 
 // Get all books
 bookRouter.get('/', (req, res) => {
